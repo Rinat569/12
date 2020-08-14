@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>	
+<html>
+    <head>
+
+        <title>Test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script>
+          function send_form() { 
+          var msg = $("#form_2").serialize();
+          $.ajax({
+          type: "POST",
+          url: "/send_form.php",
+          data: msg,
+          success: function(data) {
+          alert("Сообщение отправлено");
+          setTimeout(function () {
+          $(".feedback_form_bg").fadeOut();}, 1000);
+          },
+          error:  function(xhr, str){
+          alert("Возникла ошибка!");
+          setTimeout(function () {$(".feedback_form_bg").fadeOut();}, 1000);
+          }
+          });
+          }
+          </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="form_1" id="form_1"action="javascript:void(0);" onsubmit="send_form();" >
+              <form class="form-row" action="/" method="post" enctype="multipart/form-data">
+                <header class="header">Заказать забор</header>
+                <div class="fence__lenght">
+                  <span class="title__length">Длина забора</span>
+                  <div class="fence__container">
+                    <p class="add">
+                      <input type="text" name="lenght" id="lenght" onkeyup="greenP()"  class="input__lenght" required placeholder="0" value=''> метров</p>
+                      <div  id="elem" name="box" class=""></div>
+                  </div>   
+                </div>
+                <div class="fence__height">
+                  <span class="title__length">Высота забора</span>
+                  <div class="fence__container">
+                    <p class="add"><input type="text" id="height" name="height" class="input__height" onkeyup="greenP()" onkeydown="sumQuad()" required placeholder="0" value=''> метров</p>
+                    <div  id="elem2" name="box" class=""></div>
+                  </div>
+                </div>
+                <div class="base__fence">
+                  <span class="title__select">Материал забора</span>
+                  <select class="select" id="select">
+                    <option value="400" selected><p class="choice">Профнастил за 400 Р за м²</p></option>
+                    <option value="500"><p class="choice">Модули за 500 Р за м²</p></option>
+                    <option value="700"><p class="choice">Бетон за 700 Р за м²</p></option>
+                    <option value="200"><p class="choice">Сетка за 200 Р за м²</p></option>
+                  </select>
+                </div>
+                <div class="checkbox__group">
+                  <input type="checkbox" id="check" value="" class="checkbox" name="service">
+                  <span class="service__question">Нужен монтаж</span>
+                </div>
+                <div class="order">
+                  <p class="order__title">Сумма заказа: <span class="sum__style" id="sum">0</span> P</p>
+                </div>  
+                <div class="send">  
+                  <button type="button" class="button" id="button" onclick="nextForm()"><span class="button__name">Далее</span></button>
+                </div>  
+              </form>
+            </div>
+            <div class="form_2" id="form_2" action="javascript:void(0);" onsubmit="send_form();">
+              <form class="form-row" action="send.php" method="POST" onsubmit="send_form();" >
+                <header class="header">Пожайлуста, представьтесь</header>
+                <div class="contact__name">
+                  <span class="title__name">Ваше имя</span>
+                  <div class="contact__container">
+                    <input type="text" id="_name" name="name" class="input__name" required placeholder="">
+                    <div  id="elem3" name="box" class=""></div>
+                  </div>
+                </div>
+                <div class="contact__email">
+                  <span class="title__email">Электронная почта</span>
+                  <div class="contact__container">
+                    <input type="email" name="email"  id="_email" class="input__email" required placeholder="">
+                    <div  id="elem4" name="box" class=""></div>
+                  </div>  
+                </div>
+                <div class="contact__tel">
+                  <span class="title__email">Телефон</span>
+                  <div class="contact__container">
+                    <input type="tel" name="tel" id="tel" class="input__tel" required placeholder="+7(___)___-__-__">
+                    <div  id="elem5" name="box" class=""></div>
+                  </div>  
+                </div>
+                <div class="order2">
+                  <p class="order__title2">Вы укомплектовали забор <span id="lenght__fence" class="oreol"></span> и  <span id="height__fence" class="oreol"></span> из материла <span id="select__mt" class="oreol"></span> на сумму <span id="cash" class="sum"> 0 </span> P</p>
+                  <button type="submit" id="send_button" class="send_button"><span class="button__name2">Отправить</span></button>
+                </div>
+              </form>
+            </div>
+            <div class="popup">
+              <div class="popup__title"></div>
+              <div class="popup__message"></div>
+            </div>
+          </div>
+        <script src="script/script.js"></script>
+    </body>
+</html>
